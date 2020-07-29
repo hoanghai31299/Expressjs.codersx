@@ -7,7 +7,6 @@ block content
             form(action="/users/search", method = "GET",class="form-group d-flex m-auto")
                 input(name = 'name',type = 'text',class="form-control mr-2")
                 button(class="btn btn-light") Search
-            
         table.table.mt-3
             thread
                 tr
@@ -27,4 +26,5 @@ block content
                     td=user.name
                     td=user.phone
                     td  
-                        a.btn.btn-light(href='users/view/'+user.id) View
+                        a.btn.btn-info.mr-2(href='users/view/'+user.id) View
+                        a.btn.btn-danger(href='users/delete/'+user.id) Delete

@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 })
 app.use(express.static('public'));
 //them middleware protect voi token (csruf)
-app.use(csurf({ cookie: true }));
+app.use(csurf({ cookie: true }))
 app.use('/products', sessionMiddleware, prodRoute)
 app.use('/auth', sessionMiddleware, authRoute)
 app.use('/users', [sessionMiddleware, middlewareLogin.requireAuth], userRoute);

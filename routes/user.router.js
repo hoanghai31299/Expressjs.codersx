@@ -14,8 +14,10 @@ route.get('/search', controller.search)
 
 route.post('/create', upload.single('avatar'), validate.checkCreate, controller.create)
 
-route.get('/view/:id', controller.get)
+route.get('/view/:id', controller.view);
 
-route.get('/create', controller.getCreate)
+route.get('/create', controller.getCreate);
+
+route.get('/delete/:id', controller.delete);
 
 module.exports = route;

@@ -15,5 +15,7 @@ module.exports.postTransfer = (req, res, next) => {
         user: req.signedCookies.userId
     }
     db.get('transfers').push(data).write();
-    res.redirect('/transfer')
+    res.render('transfer/transfer', {
+        alert: "Success"
+    })
 }

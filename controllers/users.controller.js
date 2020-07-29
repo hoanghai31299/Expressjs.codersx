@@ -27,10 +27,18 @@ module.exports.create = (req, res) => {
     db.get('users').push({ id: newID, name: req.body.name, phone: md(req.body.phone), avatar: avatar }).write();
     res.redirect('/users');
 }
-module.exports.get = (req, res) => {
+module.exports.view = (req, res) => {
     var id = req.params.id;
     var user = db.get('users').find({ id: id }).value();
     res.render('users/view.pug', {
         user: user
     })
+}
+module.exports.delete = (req, res) => {
+    var id = req.params.id;
+    db.get('users')
+        .remove({ id: id })
+        .write()
+    res.redirect('/users');
+
 }
