@@ -1,0 +1,12 @@
+extends ../layouts/common
+block content
+    h1.pt-5 Transfer
+    if alert
+        .alert.alert-success=alert
+    form.form-group(action = "/transfer/create", method="POST")
+        input(type="hidden",name="_csrf",value=csruf)
+        label(for="account") Account
+        input#account.form-control(name="account",type="text")
+        label(for="amount") Amount
+        input#amount.form-control(name = "amount",type="number")
+        button.btn.btn-light.mt-3 Transfer

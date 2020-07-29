@@ -1,0 +1,30 @@
+extends ../layouts/common
+block content
+        h1.pt-5 USERS LIST
+        .d-flex
+            form(action="/users/create",class="form-group d-flex",method="GET")
+                button.btn.btn-primary Create
+            form(action="/users/search", method = "GET",class="form-group d-flex m-auto")
+                input(name = 'name',type = 'text',class="form-control mr-2")
+                button(class="btn btn-light") Search
+            
+        table.table.mt-3
+            thread
+                tr
+                    th(scope="col") Avatar
+                    th(scope="col") Name
+                    th(scope="col") Phone
+                    th(scope="col") Actions
+                    
+            tbody
+            each user in users
+                tr 
+                    td 
+                        if user.avatar
+                            img(src=user.avatar,width='32')
+                        else
+                            img(src='https://robohash.org/'+user.name,width='32')
+                    td=user.name
+                    td=user.phone
+                    td  
+                        a.btn.btn-light(href='users/view/'+user.id) View

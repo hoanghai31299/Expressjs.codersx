@@ -1,0 +1,21 @@
+extends ../layouts/common
+block content
+    h1 cart
+    table.table.table-dark.text-center
+        thead
+            tr
+                th #
+                th Name
+                th Image
+                th Quarity
+        tbody
+            -var count = 1
+            each prod in products
+                    tr
+                        td=count++
+                        td=prod.product_name
+                        td 
+                            img(src=prod.image,width='64')
+                        td=prod.quarity
+            
+            

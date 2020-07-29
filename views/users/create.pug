@@ -1,0 +1,14 @@
+extends ../layouts/common
+block content
+    h1.pt-5 Create
+    if errors
+        each err in errors
+            .alert.alert-secondary=err
+    form.form-group(action = "/users/create", method="POST",enctype="multipart/form-data")
+        label(for="name") Name
+        input#name.form-control(name="name",type="text",value=body?body.name:"")
+        label(for="phone") Phone
+        input#phone.form-control(name = "phone",type="text",value=body?body.phone:"")
+        label(for="avatar") Avatar
+        input#avatar.form-control-file(name = "avatar",type="file")
+        button.btn.btn-primary.mt-3 Create
