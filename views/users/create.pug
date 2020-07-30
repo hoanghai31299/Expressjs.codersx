@@ -4,7 +4,8 @@ block content
     if errors
         each err in errors
             .alert.alert-secondary=err
-    form.form-group(action = "/users/create", method="POST",enctype="multipart/form-data")
+    form.form-group(action = "/users/create/?_csrf="+csruf, method="POST",enctype="multipart/form-data")
+        input(type="hidden",name="_csrf",value=csruf)
         label(for="name") Name
         input#name.form-control(name="name",type="text",value=body?body.name:"")
         label(for="phone") Phone

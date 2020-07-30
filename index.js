@@ -3,10 +3,10 @@ require('dotenv').config();
 //setup
 const express = require('express');
 const app = express();
-
+const csurf = require('csurf')
 const cookieParser = require('cookie-parser')
 const body = require('body-parser');
-const csurf = require('csurf')
+
 
 const cartRoute = require('./routes/cart.router')
 const userRoute = require('./routes/user.router');
@@ -30,9 +30,10 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.get('/', (req, res) => {
     res.render('index.pug');
 })
-app.use(express.static('public'));
+app.use(express.static('public\\'));
 //them middleware protect voi token (csruf)
-app.use(csurf({ cookie: true }))
+app.use(csurf({ cookie: true }));
+
 app.use('/products', sessionMiddleware, prodRoute)
 app.use('/auth', sessionMiddleware, authRoute)
 app.use('/users', [sessionMiddleware, middlewareLogin.requireAuth], userRoute);

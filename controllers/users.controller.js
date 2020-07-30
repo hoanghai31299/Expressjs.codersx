@@ -19,7 +19,9 @@ module.exports.search = (req, res) => {
     });
 }
 module.exports.getCreate = (req, res) => {
-    res.render('users/create');
+    res.render('users/create', {
+        csruf: req.csrfToken()
+    });
 }
 module.exports.create = (req, res) => {
     let newID = shortid.generate();
