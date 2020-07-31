@@ -1,15 +1,11 @@
 const Session = require('../models/sessions.model')
 const shortId = require('shortid')
-module.exports = (req, res, next) => {
+module.exports = async(req, res, next) => {
     if (!req.signedCookies.phienLamViec) {
-        var newId = shortId.generate()
-        Session.create({
-            sessionId: newId
-        })
-        res.cookie('phienLamViec', newId, {
+        const createSession = await Session.create({});
+        res.cookie('phienLamViec', createSession._id, {
             signed: true
         });
-
     }
     next()
 }

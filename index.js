@@ -36,10 +36,10 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.get('/', (req, res) => {
     res.render('index.pug');
 })
-app.use(express.static('public\\'));
+app.use(express.static(`public`));
 //them middleware protect voi token (csruf)
 app.use(csurf({ cookie: true }));
-app.use('/products', prodRoute)
+app.use('/products', sessionMiddleware, prodRoute)
 app.use('/auth', sessionMiddleware, authRoute)
 app.use('/users', sessionMiddleware, userRoute);
 app.use('/cart', sessionMiddleware, cartRoute)

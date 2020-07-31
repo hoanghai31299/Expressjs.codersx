@@ -1,20 +1,19 @@
+const User = require('../models/users.model');
 const md = require('md5');
 
-const db = require('../db.js');
-const shortid = require('shortid');
-
-
-module.exports.root = (req, res) => {
-    res.render('users/users.pug', {
-        users: db.get('users').value()
+module.exports.root = async(req, res) => {
+    let users = await User.find().lean();
+    res.render('users/index', {
+        users: users
     });
 }
-module.exports.search = (req, res) => {
-    var keyWord = req.query.name
-    let matchedUsersList = db.get('users').value().filter((u) => {
+module.exports.search = async(req, res) => {
+    var keyWord = req.query.name;
+    let users = await User.find().lean();
+    let matchedUsersList = users.filter((u) => {
         return u.name.toLowerCase().indexOf(keyWord.toLowerCase()) !== -1;
     })
-    res.render('users/users.pug', {
+    res.render('users/index', {
         users: matchedUsersList
     });
 }
@@ -23,24 +22,24 @@ module.exports.getCreate = (req, res) => {
         csruf: req.csrfToken()
     });
 }
-module.exports.create = (req, res) => {
-    let newID = shortid.generate();
+module.exports.create = async(req, res) => {
     let avatar = req.file.path.split('\\').slice(1).join('\\');
-    db.get('users').push({ id: newID, name: req.body.name, phone: md(req.body.phone), avatar: avatar }).write();
+    await User.create({
+        name: req.body.name,
+        phone: md(req.body.phone),
+        avatar: avatar
+    })
     res.redirect('/users');
 }
-module.exports.view = (req, res) => {
+module.exports.view = async(req, res) => {
     var id = req.params.id;
-    var user = db.get('users').find({ id: id }).value();
+    var user = await User.findById(id).lean();
     res.render('users/view.pug', {
         user: user
     })
 }
-module.exports.delete = (req, res) => {
+module.exports.delete = async(req, res) => {
     var id = req.params.id;
-    db.get('users')
-        .remove({ id: id })
-        .write()
+    await User.deleteOne({ _id: id })
     res.redirect('/users');
-
 }

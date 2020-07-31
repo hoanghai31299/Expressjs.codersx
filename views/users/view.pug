@@ -1,9 +1,10 @@
 extends ../layouts/common
 block content
-    h1.pt-5 View
-    p
-        b NAME: &#9;
-        span=user.name
-        br
-        b ID: &#9;
-        span=user.id
+    h1.pt-5.text-center View
+    .wrapper.d-flex.flex-column.justify-content-center.align-items-center
+        if user.avatar
+            img.img-fluid.d-block.reponsive-img(src="/"+user.avatar)
+        else
+            img.img-fluid.d-block.reponsive-img(src='https://robohash.org/'+user.name)
+        h1.text-red=user.name
+        h1=user.phone

@@ -7,8 +7,7 @@ module.exports.login = (req, res) => {
     })
 }
 module.exports.postLogin = async(req, res) => {
-    let user = await User.findOne({ name: req.body.name });
-
+    let user = await User.findOne({ name: req.body.name }).lean();
     if (!user) {
         err = ['User does not exist'];
         res.render('auth/login', {
