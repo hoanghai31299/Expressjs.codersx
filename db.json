@@ -34,15 +34,13 @@
       "id": "424d8118630f4d8d4bcfa2b0867f8c7a",
       "product_name": "S6",
       "image": "https://robohash.org/etutprovident.bmp?size=300x300&set=set1",
-      "description": "pharetra magna ac consequat metus sapien ut nunc vestibulum ante",
-      "quarity": 1
+      "description": "pharetra magna ac consequat metus sapien ut nunc vestibulum ante"
     },
     {
       "id": "4f288b3c97467a0bdffe5ce0b6c15e27",
       "product_name": "Park Avenue",
       "image": "https://robohash.org/iustoidvoluptatibus.bmp?size=300x300&set=set1",
-      "description": "sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan",
-      "quarity": 5
+      "description": "sit amet cursus id turpis integer aliquet massa id lobortis convallis tortor risus dapibus augue vel accumsan"
     },
     {
       "id": "1a75b48edfb81defdd5df579102aa71d",
@@ -60,15 +58,13 @@
       "id": "5d90de26a86f804c749dcd4c981a7860",
       "product_name": "F-Series",
       "image": "https://robohash.org/sittemporatempore.png?size=300x300&set=set1",
-      "description": "dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus",
-      "quarity": 1
+      "description": "dapibus nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus"
     },
     {
       "id": "2ef11671345703434a228958a5a78adc",
       "product_name": "Pajero",
       "image": "https://robohash.org/temporequasiet.bmp?size=300x300&set=set1",
-      "description": "morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus",
-      "quarity": 1
+      "description": "morbi a ipsum integer a nibh in quis justo maecenas rhoncus aliquam lacus"
     },
     {
       "id": "fb9e78228de08583fb70debf9aae861f",
@@ -657,6 +653,17 @@
         "424d8118630f4d8d4bcfa2b0867f8c7a": 1,
         "4f288b3c97467a0bdffe5ce0b6c15e27": 1
       }
+    },
+    {
+      "id": "B6F9ued1b",
+      "cart": {
+        "424d8118630f4d8d4bcfa2b0867f8c7a": 9,
+        "4f288b3c97467a0bdffe5ce0b6c15e27": 1,
+        "5f22d9ccb18a65226916e315": 2
+      }
+    },
+    {
+      "id": "kBmMAVoe4"
     }
   ],
   "transfers": [

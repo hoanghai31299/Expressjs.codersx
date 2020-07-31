@@ -5,6 +5,7 @@ block content
         each err in errors
             .alert.alert-secondary=err
     form.form-group(method="POST")
+        input(type="hidden", name="_csrf", value=csruf)
         label(for="name") Name
         input#name.form-control(name="name",type="text",value=body?body.name:"")
         label(for="phone") Phone

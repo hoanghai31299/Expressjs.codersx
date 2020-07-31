@@ -1,15 +1,19 @@
 const md = require('md5')
-const db = require('../db.js')
+const User = require('../models/users.model')
 
 module.exports.login = (req, res) => {
-    res.render('auth/login')
+    res.render('auth/login', {
+        csruf: req.csrfToken()
+    })
 }
-module.exports.postLogin = (req, res) => {
-    var user = db.get('users').find({ name: req.body.name }).value();
+module.exports.postLogin = async(req, res) => {
+    let user = await User.findOne({ name: req.body.name });
+
     if (!user) {
         err = ['User does not exist'];
         res.render('auth/login', {
             errors: err,
+            csruf: req.csrfToken(),
             body: req.body
         })
         return;
@@ -18,11 +22,12 @@ module.exports.postLogin = (req, res) => {
         err = ['Wrong password'];
         res.render('auth/login', {
             errors: err,
+            csruf: req.csrfToken(),
             body: req.body
         })
         return;
     }
-    res.cookie('userId', user.id, {
+    res.cookie('userId', user._id, {
         signed: true
     })
     res.redirect('/users');

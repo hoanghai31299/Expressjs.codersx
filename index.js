@@ -3,6 +3,10 @@ require('dotenv').config();
 //setup
 const express = require('express');
 const app = express();
+//mongoose to use mongodb
+const { connectDB } = require('./models');
+connectDB()
+
 const csurf = require('csurf')
 const cookieParser = require('cookie-parser')
 const body = require('body-parser');
@@ -19,11 +23,13 @@ const sessionMiddleware = require('./middlewares/sessions.middleware')
 const middlewareLogin = require('./middlewares/auth.middleware')
 
 const port = 8080;
+
 app.set('views', './views');
 app.set('view engine', 'pug');
 //setup de xem body cua request
 app.use(express.json()) // for parsing application/json
 app.use(cookieParser(process.env.SESSION_SECRET));
+
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
     //app.use(sessionMiddleware);
     //bat dau
@@ -33,12 +39,11 @@ app.get('/', (req, res) => {
 app.use(express.static('public\\'));
 //them middleware protect voi token (csruf)
 app.use(csurf({ cookie: true }));
-
-app.use('/products', sessionMiddleware, prodRoute)
+app.use('/products', prodRoute)
 app.use('/auth', sessionMiddleware, authRoute)
-app.use('/users', [sessionMiddleware, middlewareLogin.requireAuth], userRoute);
+app.use('/users', sessionMiddleware, userRoute);
 app.use('/cart', sessionMiddleware, cartRoute)
-app.use('/transfer', middlewareLogin.requireAuth, transferRoute)
+app.use('/transfer', sessionMiddleware, middlewareLogin.requireAuth, transferRoute)
 app.listen(port, () => {
     console.log(`da mo khoa con localhost:${port}`);
 })

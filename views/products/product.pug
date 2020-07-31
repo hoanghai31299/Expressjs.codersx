@@ -18,24 +18,36 @@ block content
                         h5.card-title=product.product_name
                         p.card-text(style="height:48px;white-space:wrap;overflow:hidden;text-overflow: ellipsis;")=product.description
                         .d-flex.justify-content-center
-                            a.btn.btn-info(href='/cart/add/'+product.id) Add to cart
+                            a.btn.btn-info(href='/cart/add/'+product._id) Add to cart
     nav.float-right.mt-3(aria-label='...')
         ul.pagination
-            - var urlBegin = '/products?page='+pagination.previous
-            - var urlNext = '/products?page='+pagination.next
-            if pagination.previous == 0
-                li.page-item.disabled
-                    a.page-link(href=urlBegin, tabindex='-1', aria-disabled='true') Previous
-            else
+            li.page-item
+                a.page-link(href='/products?page=1', action="/products"  method="GET") &laquo;
+            if currentPage > 1
                 li.page-item
-                    a.page-link(href=urlBegin, tabindex='-1', aria-disabled='true') Previous
-            each page in pagination.middle
-                if page == pagination.page
-                     li.page-item.active(aria-current='page')
-                        a.page-link(href='/products?page='+page)=page
-                        span.sr-only (current)
+                    if currentPage < pages
+                        - var tam = currentPage;
+                        - var pre = tam-1
+                        a.page-link(href='/products?page='+ pre, action="/products"  method="GET") &lt;   
+            - var i = currentPage - (range/2 + 1) + 1;
+            - var n = currentPage + (range/2 - 1);
+            if i <= 1
+                - var i = 1
+            if n > pages
+                - var n = pages
+            if n < range
+                - var n = range
+            while i <= n
+                if i==currentPage
+                    li.page-item.active
+                        a.page-link(href='/products?page='+ i, action="/products" method="GET")=i++
                 else
                     li.page-item
-                        a.page-link(href='/products?page='+page)=page
+                        a.page-link(href='/products?page='+ i, action="/products" method="GET")=i++ 
+            if currentPage < pages - 1
+                li.page-item
+                    - var tamp = currentPage
+                    - var next = tamp + 1
+                    a.page-link(href='/products?page='+ next, action="/products" method="GET") &gt;
             li.page-item
-                a.page-link(href=urlNext) Next
+                a.page-link(href='/products?page=' + pages, action="/products" method="GET") &raquo;

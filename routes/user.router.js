@@ -5,8 +5,9 @@ const validate = require('../middlewares/validate.middleware');
 
 const multer = require('multer');
 const upload = multer({ dest: 'public/uploads/' })
+const middlewareLogin = require('../middlewares/auth.middleware');
 
-
+route.use(middlewareLogin.requireAuth);
 
 route.get('/', controller.root)
 
