@@ -23,6 +23,6 @@ module.exports.add = async(req, res) => {
     session.cart = session.cart || {};
     let count = await session.cart[prodId] || 0;
     session.cart[prodId] = count + 1;
-    await Session.updateOne({ sessionId: session.sessionId }, session);
+    await Session.updateOne({ _id: session._id }, session);
     res.redirect('/cart');
 }
